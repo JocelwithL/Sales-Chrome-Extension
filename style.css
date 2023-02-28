@@ -17,7 +17,7 @@ body {
 }
 
 
-#input-btn {
+#save-btn {
     background-color: #144272;
     border: none;
     border-radius: 3px ;
@@ -29,14 +29,46 @@ body {
 
 
 
-#input-btn:hover {
+#save-btn:hover {
     background-color: #205295;
     cursor: pointer;
 }
 
-#container {
-    width: ;
+#savetab-btn {
+    background-color: #144272;
+    border: none;
+    border-radius: 3px ;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    font-weight: bold;
 }
+
+
+
+#savetab-btn:hover {
+    background-color: #205295;
+    cursor: pointer;
+}
+
+#clear-btn {
+    box-sizing: border-box;
+    border: 1px solid #205295;
+    border-radius: 3px ;
+    color: #205295;
+    font-size: 16px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+
+
+#clear-btn:hover {
+    background-color: #c4def5;
+    cursor: pointer;
+}
+
+
 
 ul {
     padding-left: 10px;

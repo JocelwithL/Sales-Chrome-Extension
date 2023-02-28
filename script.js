@@ -1,29 +1,63 @@
 let myLeads = [];
-const inputBtn = document.getElementById("input-btn");
+const saveBtn = document.getElementById("save-btn");
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
+const clearBtn = document.getElementById("clear-btn");
+const saveTabBtn = document.getElementById("savetab-btn");
 
-inputBtn.addEventListener("click",function() {
-    myLeads.push(inputEl.value);
-    renderLeads();
-    inputEl.value = "";
+let leadsFromStorage = localStorage.getItem("myLeads")
+leadsFromStorage = JSON.parse(leadsFromStorage);
+
+if (leadsFromStorage) {
+    myLeads = leadsFromStorage;
+    renderLeads(myLeads);
+}
+
+
+    
+
+saveTabBtn.addEventListener("click", function() {
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+        myLeads.push(tabs[0].url)
+        localStorage.setItem("myLeads",JSON.stringify(myLeads));
+        renderLeads(myLeads)
+      });
+
+    
 })
 
 
-function renderLeads() {
+function renderLeads(leads) {
     let listLead = ""
 
-    for (let i = 0; i < myLeads.length; i++) {
+    for (let i = 0; i < leads.length; i++) {
         listLead += `<li>
-                        <a href ='${myLeads[i]}' target='_blank'>
-                        ${myLeads[i]}
+                        <a href ='${leads[i]}' target='_blank'>
+                        ${leads[i]}
                         </a>
                     </li>`
-        console.log(listLead)
     } 
 
     ulEl.innerHTML = listLead
 
 }
 
-//5:27:26
+
+clearBtn.addEventListener("dblclick", function() {
+    localStorage.clear();
+    myLeads = [];
+    ulEl.innerHTML = null;
+})
+
+
+saveBtn.addEventListener("click",function() {
+    myLeads.push(inputEl.value);
+    inputEl.value = "";
+    localStorage.setItem("myLeads",JSON.stringify(myLeads));
+    renderLeads(myLeads);
+})
+
+
+
+
+//7:09:30
